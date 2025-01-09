@@ -2,6 +2,7 @@ using UnityEngine;
 using Leopotam.Ecs;
 using Voody.UniLeo;
 using Core.Movement;
+using Core.MouseLook;
 
 public class Bootstrap : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class Bootstrap : MonoBehaviour
 
     private void AddSystems()
     {
+        _systems.Add(new PlayerMouseLookSystem());
+
         _systems.Add(new PlayerButtonJumpPressSystem());
         _systems.Add(new PlayerJumpSystem());
         _systems.Add(new PlayerGravitySystem());
