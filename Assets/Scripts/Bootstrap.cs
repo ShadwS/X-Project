@@ -1,6 +1,7 @@
 using UnityEngine;
 using Leopotam.Ecs;
 using Voody.UniLeo;
+using Core.Movement;
 
 public class Bootstrap : MonoBehaviour
 {
@@ -35,7 +36,7 @@ public class Bootstrap : MonoBehaviour
 
     private void AddSystems()
     {
-
+        _systems.Add(new PlayerMovementSystem());
     }
 
     private void AddOneFrame()
