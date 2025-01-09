@@ -15,12 +15,19 @@ namespace Core.Movement
                 ref var playerJumpComponent = ref _playerFilter.Get2(i);
 
                 var controller = characterControllerComponent.CharacterController;
-                var velocity = controller.velocity;
-                var gravityForce = playerJumpComponent.GravityForce;
+                var isGround = controller.isGrounded;
 
-                velocity.y = controller.isGrounded ? -1 : velocity.y - gravityForce * Time.deltaTime;
+                ref var y = ref playerJumpComponent.VelocityY;
+                var baseGravity = playerJumpComponent.BaseGravity;
 
-                controller.Move(velocity * Time.deltaTime);
+                if (isGround && y < baseGravity)
+                {
+                    y = baseGravity;
+                }
+                else
+                {
+                    y -= playerJumpComponent.GravityForce * Time.deltaTime;
+                }
             }
         }
     }

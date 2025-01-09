@@ -36,11 +36,14 @@ public class Bootstrap : MonoBehaviour
 
     private void AddSystems()
     {
-        _systems.Add(new PlayerMovementSystem());
+        _systems.Add(new PlayerButtonJumpPressSystem());
+        _systems.Add(new PlayerJumpSystem());
         _systems.Add(new PlayerGravitySystem());
+        _systems.Add(new PlayerMovementSystem());
     }
 
     private void AddOneFrame()
     {
+        _systems.OneFrame<JumpEvent>();
     }
 }
