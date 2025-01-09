@@ -9,10 +9,7 @@ namespace Core.Movement
 
         private MyInput _inputs;
 
-        public void Init()
-        {
-            _inputs = new MyInput();
-        }
+        public void Init() => _inputs = new MyInput();
 
         public void Run()
         {
@@ -21,7 +18,7 @@ namespace Core.Movement
                 ref var characterControllerComponent = ref _playerFilter.Get1(i);
                 ref var playerSpeedConponent = ref _playerFilter.Get2(i);
 
-                ref var controller = ref characterControllerComponent.CharacterController;
+                var controller =  characterControllerComponent.CharacterController;
                 var speed = playerSpeedConponent.Speed;
 
                 controller.Move(_inputs.GetDirection() * speed * Time.deltaTime);

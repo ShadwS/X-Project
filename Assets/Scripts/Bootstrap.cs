@@ -37,10 +37,10 @@ public class Bootstrap : MonoBehaviour
     private void AddSystems()
     {
         _systems.Add(new PlayerMovementSystem());
+        _systems.Add(new PlayerGravitySystem());
     }
 
     private void AddOneFrame()
     {
-
     }
 }
