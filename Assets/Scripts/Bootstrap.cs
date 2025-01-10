@@ -37,6 +37,7 @@ public class Bootstrap : MonoBehaviour
 
     private void AddSystems()
     {
+        _systems.Add(new CursorDisableSystem());
         _systems.Add(new PlayerMouseLookSystem());
 
         _systems.Add(new PlayerButtonJumpPressSystem());

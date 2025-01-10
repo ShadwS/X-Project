@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Core.Movement
 {
-    public struct MyInput : IInput
+    public struct Movable : IInput
     {
         public Vector3 GetDirection(float y)
         {

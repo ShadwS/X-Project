@@ -8,9 +8,9 @@ namespace Core.Movement
         private readonly EcsFilter<CharacterControllerComponent, PlayerSpeedComponent,
             PlayerJumpComponent> _playerFilter = null;
 
-        private MyInput _inputs;
+        private Movable _inputs;
 
-        public void Init() => _inputs = new MyInput();
+        public void Init() => _inputs = new Movable();
 
         public void Run()
         {
@@ -25,7 +25,9 @@ namespace Core.Movement
 
                 var y = playerJumpComponent.VelocityY;
 
-                controller.Move(_inputs.GetDirection(y) * speed * Time.deltaTime);
+                var playerTransform = controller.gameObject.transform;
+
+                controller.Move(playerTransform.TransformDirection(_inputs.GetDirection(y)) * speed * Time.deltaTime);
             }
         }
     }

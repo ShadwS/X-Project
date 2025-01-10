@@ -3,9 +3,12 @@ using UnityEngine;
 
 namespace Core.MouseLook
 {
-    public sealed class PlayerMouseLookSystem : IEcsRunSystem
+    public sealed class PlayerMouseLookSystem : IEcsRunSystem, IEcsInitSystem
     {
-        private readonly EcsFilter<PlayerMouseLookComponent> _playerFilter = null;
+        private readonly EcsFilter<PlayerMouseLookComponent, MouseSensetivityComponent> _playerFilter = null;
+
+        private MouseLook _mouse;
+        public void Init() => _mouse = new();
 
         public void Run()
         {
@@ -15,8 +18,15 @@ namespace Core.MouseLook
                 ref var cameraTransform = ref playerMouseLookComponent.Camera;
                 ref var playerTransform = ref playerMouseLookComponent.Player;
 
-                cameraTransform.Rotate(cameraTransform.right * Input.GetAxis("Mouse Y") * -100 * Time.deltaTime);
-                playerTransform.Rotate(Vector3.up * Input.GetAxis("Mouse X") * 100 * Time.deltaTime);
+                ref var mouseSensetivitycomponent = ref _playerFilter.Get2(i);
+                var sensetivity = mouseSensetivitycomponent.Sensetivity;
+
+                playerTransform.Rotate(Vector3.up * _mouse.GetX() * sensetivity * Time.deltaTime);
+
+                var xRotate = cameraTransform.rotation.eulerAngles.x;
+                xRotate += _mouse.GetY() * -sensetivity * Time.deltaTime;
+
+                cameraTransform.rotation = Quaternion.Euler(xRotate, playerTransform.rotation.eulerAngles.y, 0);
             }
         }
     }
