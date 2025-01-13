@@ -450,5 +450,5 @@ MonoBehaviour:
   value:
     VelocityY: -1
     _jumpForce: 1.8
-    _gravityForce: 9.82
+    _gravityForce: 7
     _baseGravity: -1
