@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value:
-    _maxAngkeX: 45
+    _maxAngkeX: 90
 --- !u!1001 &7379133631256298886
 PrefabInstance:
   m_ObjectHideFlags: 0

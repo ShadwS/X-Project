@@ -29,14 +29,34 @@ namespace Core.MouseLook
                 var xRotate = cameraTransform.rotation.eulerAngles.x;
 
                 xRotate -= _mouse.GetY() * sensetivity * Time.deltaTime;
-                if (xRotate < 180)
+
+                if (xRotate < 180)//вниз
                 {
-                    xRotate = Mathf.Clamp(xRotate, 0, clampX);
+                    Debug.Log(xRotate);
                 }
-                else
+                if (xRotate > 180)//вверх
                 {
-                    xRotate = Mathf.Clamp(xRotate, 360 - clampX, 360);
+                    Debug.Log(xRotate - 360);
+                    xRotate = xRotate - 360;
                 }
+                xRotate = Mathf.Clamp(xRotate, -clampX, clampX);
+                if (xRotate < 0)
+                {
+                    xRotate = 360 + xRotate;
+                }
+
+                //if (xRotate >= 0 && xRotate < 180)
+                //{
+                //    xRotate = Mathf.Clamp(xRotate, 0, clampX);
+                //}
+                //else
+                //{
+                //    xRotate = Mathf.Clamp(xRotate, 360 - clampX, 359.99f);
+                //    if (xRotate >= 359.5f)
+                //    {
+                //        xRotate = 0;
+                //    }
+                //}
 
                 cameraTransform.rotation = Quaternion.Euler(xRotate, playerTransform.rotation.eulerAngles.y, 0);
             }
